@@ -3,6 +3,7 @@ package Juego;
 import javax.swing.JOptionPane;
 
 public class Enemy {
+
     int posIniX = 0;
     int posIniY = 0;
     int x = 0;
@@ -10,19 +11,19 @@ public class Enemy {
     int ancho;
     int largo;
     boolean going = true;
-    long born_time;
+    long bornTime;
     boolean isDead = false;
     private char icono = 'e';
 
-    public Enemy(int x, int y, int ancho, int largo, long born_time) {
+    public Enemy(int x, int y, int ancho, int largo, long bornTime) {
         this.ancho = ancho;
         this.largo = largo;
-        this.x = this.posIniX = x;
-        this.y = this.posIniY = y;
-        this.born_time = born_time;
+        this.posIniX = this.x = x;
+        this.posIniY = this.y = y;
+        this.bornTime = bornTime;
     }
 
-    public void kill_enemigo() {
+    public void killEnemigo() {
         this.isDead = true;
     }
 
@@ -58,12 +59,12 @@ public class Enemy {
         }
     }
 
-    public void setBornTime(long born_time) {
-        this.born_time = born_time;
+    public long getBornTime() {
+        return bornTime;
     }
 
-    public long getBornTime() {
-        return this.born_time;
+    public void setBornTime(long bornTime) {
+        this.bornTime = bornTime;
     }
 
     public void haChocado() {

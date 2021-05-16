@@ -1,14 +1,11 @@
 package Servidor;
 
 import Juego.GameController;
-import Juego.CreateStage;
-import Juego.Stage;
 import Juego.player;
-import Juego.Bullet;
 import java.util.Scanner;
-import javax.swing.JOptionPane;
 
 class Client {
+
     GameController controlador;
     public double Intparcial[] = new double[40];
     TCPClient mTcpClient;
@@ -24,36 +21,32 @@ class Client {
     int posY = 0;
 
     public static void main(String[] args) {
-        Client objcli = new Client();
-        objcli.iniciar();
+        Client cliente = new Client();
+        cliente.iniciar();
     }
 
     void iniciar() {
-        // aqui se inicia el juego offline
+        // Aquí se inicia el juego offline
         controlador = new GameController();
         new Thread(new Runnable() {
 
             @Override
             public void run() {
-                // 192.168.0.14
-                mTcpClient = new TCPClient("25.14.107.177", new TCPClient.OnMessageReceived() {
+                mTcpClient = new TCPClient("25.12.237.194", new TCPClient.OnMessageReceived() {
                     @Override
                     public void messageReceived(String message) {
-                        // if(message.contains("nombredeCliente"));
-                        ClienteRecibe(message);
+                        clienteRecibe(message);
                     }
                 });
 
                 mTcpClient.run();
             }
         }).start();
-        // System.out.println(".messageToSend()");
         sc = new Scanner(System.in);
-        // Boolean iniciar = true;
         while (true) {
             if (mTcpClient != null) {
                 if (!idknown) {
-                    ClienteEnvia("enviameID");
+                    clienteEnvia("enviameID");
                     try {
                         Thread.sleep(500);
                     } catch (Exception e) {
@@ -63,7 +56,7 @@ class Client {
                     p = controlador.getCharacter();
                     this.posBomX = controlador.getPosBomX();
                     this.posBomY = controlador.getPosBomY();
-                    
+
                     if (p != null) {
                         String posJugador = p.getPosJugador();
                         int x = Integer.parseInt(posJugador.split("\\s")[0]);
@@ -72,18 +65,18 @@ class Client {
                         if (x != posX || y != posY) {
                             // System.out.println(posJugador+p.getx());
                             MessageToServer = "posJugador " + posJugador;
-                            ClienteEnvia(MessageToServer);
+                            clienteEnvia(MessageToServer);
                             // escenario = controlador.getEscenario();
                             // escenario.mostrarEscenario();
                             this.posX = x;
                             this.posY = y;
                         }
                     }
-                    
+
                     if (this.posBomX != -1 && this.posBomY != -1) {
-                    	String posBomba = String.valueOf(this.posBomX) + " " + String.valueOf(this.posBomY);
+                        String posBomba = String.valueOf(this.posBomX) + " " + String.valueOf(this.posBomY);
                         MessageToServer = "posBomba " + posBomba; //MessageToServer posBomba x y;	
-                        ClienteEnvia(MessageToServer);
+                        clienteEnvia(MessageToServer);
                         controlador.setPosBomX(-1);
                         controlador.setPosBomY(-1);
                     }
@@ -92,7 +85,7 @@ class Client {
         }
     }
 
-    void ClienteRecibe(String llego) {
+    void clienteRecibe(String llego) {
         //System.out.println("CLINTE50 El mensaje::" + llego);
         if (llego.trim().contains("tuID")) {
             String arrayString[] = llego.split("\\s+");
@@ -108,7 +101,7 @@ class Client {
             int y = Integer.parseInt(arrayString[3]);
             this.controlador.setPlayerAtPosition(id, x, y);
         }
-        
+
         if (llego.trim().contains("posBomba ") && this.controlador.getEscenario() != null) { // posBomba posX posY
             String arrayString[] = llego.split("\\s+");
             int x = Integer.parseInt(arrayString[1]);
@@ -117,7 +110,7 @@ class Client {
         }
     }
 
-    void ClienteEnvia(String envia) {
+    void clienteEnvia(String envia) {
         if (mTcpClient != null) {
             mTcpClient.sendMessage(envia);
         }

@@ -2,10 +2,11 @@ package Juego;
 
 public class Stage {
 
-    private int ancho, largo;
-    private char[][] matrizEscenario;
+    private final int ancho;
+    private final int largo;
+    private final char[][] matrizEscenario;
     private boolean userAlive = true;
-    
+
     public Stage(int ancho, int largo) {
         this.ancho = ancho;
         this.largo = largo;
@@ -13,18 +14,17 @@ public class Stage {
     }
 
     public void iniciarEscenario() {
-        for (int i = 0; i < largo; i++) {
-            for (int j = 0; j < ancho; j++) {
-                matrizEscenario[i][j] = ' ';
+        for (int i = 0; i < this.largo; i++) {
+            for (int j = 0; j < this.ancho; j++) {
+                this.matrizEscenario[i][j] = ' ';
             }
         }
     }
 
     public void mostrarEscenario() {
-
-        for (int i = 0; i < largo; i++) {
-            for (int j = 0; j < ancho; j++) {
-                System.out.print(matrizEscenario[i][j]);
+        for (int i = 0; i < this.largo; i++) {
+            for (int j = 0; j < this.ancho; j++) {
+                System.out.print(this.matrizEscenario[i][j]);
             }
             System.out.print("\n");
         }
@@ -35,30 +35,30 @@ public class Stage {
     }
 
     public int getAnchoEscenario() {
-        return ancho;
+        return this.ancho;
     }
 
     public int getLargoEscenario() {
-        return largo;
+        return this.largo;
     }
 
     public char getCaracterEnCoordenada(int x, int y) {
-        return matrizEscenario[y][x];
+        return this.matrizEscenario[y][x];
     }
 
     public void setCaracterEnCoordenada(char icon, int x, int y) {
-        matrizEscenario[y][x] = icon;
+        this.matrizEscenario[y][x] = icon;
     }
 
     public void setCaracterEnCoordenada(StageComponent object, int x, int y) {
-        matrizEscenario[y][x] = object.getIcono();
+        this.matrizEscenario[y][x] = object.getIcono();
     }
 
-	public boolean isUserAlive() {
-		return userAlive;
-	}
+    public boolean isUserAlive() {
+        return this.userAlive;
+    }
 
-	public void setUserAlive(boolean userAlive) {
-		this.userAlive = userAlive;
-	}
+    public void setUserAlive(boolean userAlive) {
+        this.userAlive = userAlive;
+    }
 }

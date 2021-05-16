@@ -2,7 +2,8 @@ package Juego;
 
 public class StageComponent {
 
-    private int x, y;
+    private int x;
+    private int y;
     private char icono;
 
     public int getX() {

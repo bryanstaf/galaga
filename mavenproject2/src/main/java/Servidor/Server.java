@@ -63,16 +63,17 @@ public class Server {
             // Para posicion del jugador
             if (llego.trim().contains("posJugador")) {
                 String jugador[] = llego.split("\\s+");
+                System.out.println("Arreglo jugador: " + jugador[0] + jugador[1] + jugador[2]);
                 int posX = Integer.parseInt(jugador[1]);
                 int posY = Integer.parseInt(jugador[2]);
                 int id = Integer.parseInt(jugador[jugador.length - 1]);
                 System.out.println("Jugador " + String.valueOf(id) + " " + jugador[1] + " " + jugador[2]);
-                ServidorEnviaPosJugador("Jugador " + String.valueOf(id) + " " + jugador[1] + " " + jugador[2], id); // mandar
-                                                                                                                    // -->
-                                                                                                                    // Jugador
-                                                                                                                    // ID
-                                                                                                                    // x
-                                                                                                                    // y
+                servidorEnviaPosJugador("Jugador " + String.valueOf(id) + " " + jugador[1] + " " + jugador[2], id); // mandar
+                // -->
+                // Jugador
+                // ID
+                // x
+                // y
                 System.err.println("x;" + jugador[1] + "y:" + jugador[2]);
             }
             if (llego.trim().contains("enviameID")) {
@@ -81,10 +82,10 @@ public class Server {
                 ServidorEnviaID("tuID " + id, Integer.parseInt(id));
             }
             if (llego.trim().contains("posBomba")) {
-        		String bomba[] = llego.split("\\s+");
+                String bomba[] = llego.split("\\s+");
                 String posBomba = bomba[1] + " " + bomba[2];
                 System.out.println(bomba[1] + " " + bomba[2]);
-                ServidorEnviaPosBomba(posBomba);
+                servidorEnviaPosBomba(posBomba);
                 System.err.println("x;" + bomba[1] + "y:" + bomba[2]);
             }
 
@@ -95,10 +96,10 @@ public class Server {
          * Double.parseDouble(arrString[1]); if (data > 0) { rptacli[contarcliente] =
          * data; System.out.println("i:" + contarcliente + " rptacli[i]" +
          * rptacli[contarcliente]); System.out.println("Llego el servidor: " + data);
-         * System.out.println("Ellos son:" + this.mTcpServer.nrcli);//cuantos clientes
+         * System.out.println("Ellos son:" + this.mTcpServer.nroCliente);//cuantos clientes
          * son contarcliente = contarcliente + 1; //incremento un cliente
          * 
-         * if (contarcliente == this.mTcpServer.nrcli) { for (int i = 0; i <
+         * if (contarcliente == this.mTcpServer.nroCliente) { for (int i = 0; i <
          * contarcliente; i++) { System.out.println("ya   i:" + i + " rptacli[i]" +
          * rptacli[i]); sumclient = sumclient + rptacli[i];
          * 
@@ -109,26 +110,14 @@ public class Server {
          */
     }
 
-    void ServidorEnviaNumClientes(int numClientes) {
-        String envia = String.valueOf(numClientes);
-        if (envia != null) {
-            System.out.println("Soy Server y envio" + envia);
-            if (mTcpServer != null) {
-                mTcpServer.sendMessageTCPServer("numJugadores " + envia);
-            } else {
-                System.out.println("NO TIENE ENVIO!!!");
-            }
-        }
-    }
-
-    void ServidorEnviaPosJugador(String msg, int id) {
+    void servidorEnviaPosJugador(String msg, int id) {
         // Jugador ID x y
         if (msg != null) {
             mTcpServer.sendMessageToOtherClients(msg, id);
         }
     }
-    
-    void ServidorEnviaPosBomba(String msg) {
+
+    void servidorEnviaPosBomba(String msg) {
         if (msg != null) {
             if (mTcpServer != null) {
                 mTcpServer.sendMessageTCPServer("posBomba " + msg);

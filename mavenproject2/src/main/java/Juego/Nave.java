@@ -8,7 +8,7 @@ public class Nave extends StageComponent {
     private int numeroMuroD = 14;
 
     public Nave() {
-        setIcono('=');
+        this.setIcono('=');
     }
 
     public void agregarMuroSuave(Stage escenario, Nave muroDestructible) {
