@@ -84,7 +84,7 @@ public class TCPServer {
                 System.out.println("Engendrado: " + nroCliente);
                 sendclis[nroCliente] = new TCPServerThread(client, this, nroCliente, sendclis);
                 for (int i = 0; i < sendclis.length; i++) {
-                    System.out.println("sendclis: [i] = " + i + ", nroCliente = " + nroCliente + ", sendclis[i] = " + sendclis[i] +  ", sendclis[nroCliente] = " + sendclis[nroCliente]);
+                    System.out.println("sendclis: [i] = " + i + ", nroCliente = " + nroCliente + ", sendclis[i] = " + sendclis[i]);
                 }
                 Thread t = new Thread(sendclis[nroCliente]);
                 t.start();

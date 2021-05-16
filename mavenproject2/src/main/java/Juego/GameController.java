@@ -12,7 +12,7 @@ public class GameController extends javax.swing.JFrame {
     int playerID = 0;
     int arr[][];
     public player localPlayer = null;
-    String[] posIniciales = { "30 13"};
+    String[] posIniciales = {"30 13", "40 11", "20 11", "48 12", "12 12"};
     int xInit = 39, yInit = 6;
     Stage escenario = null;
     CreateStage mEsc;
@@ -34,6 +34,7 @@ public class GameController extends javax.swing.JFrame {
     public void setPlayerID(int id) {
         System.out.println("Se esta iniciando el juego...");
         this.playerID = id;
+        System.out.println("setPlayerID.id = " + id + ", posIniciales.length = " + posIniciales.length);
         String[] pos = posIniciales[(id - 1)%5].split("\\s");
         this.xInit = Integer.parseInt(pos[0]);
         this.yInit = Integer.parseInt(pos[1]);
