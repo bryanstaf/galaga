@@ -57,7 +57,7 @@ public class GameController extends javax.swing.JFrame {
     
     public void setBombaAtPosition(int x, int y) {
     	//System.out.println(x + y);
-        this.escenario.setCaracterEnCoordenada('@', x, y);
+        //this.escenario.setCaracterEnCoordenada('z', x, y);
 
         this.escenario.mostrarEscenario();
         (new Bullet(x,y,this.escenario, this.localPlayer)).start();

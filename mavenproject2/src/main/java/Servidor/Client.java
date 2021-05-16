@@ -36,7 +36,7 @@ class Client {
             @Override
             public void run() {
                 // 192.168.0.14
-                mTcpClient = new TCPClient("25.14.107.177", new TCPClient.OnMessageReceived() {
+                mTcpClient = new TCPClient("25.77.137.154", new TCPClient.OnMessageReceived() {
                     @Override
                     public void messageReceived(String message) {
                         // if(message.contains("nombredeCliente"));
