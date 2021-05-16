@@ -72,9 +72,9 @@ public class player {
 		this.hasBomb = hasBomb;
 	}
 	public void dropBomb(int x, int y, Stage escenario) {
-        mapa.setCaracterEnCoordenada('@', x, y);
+        
         (new Bullet(x, y, escenario, this)).start();
-        mapa.mostrarEscenario();
+        
     }
     
     public void getBomb(){

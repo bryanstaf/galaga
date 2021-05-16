@@ -12,7 +12,15 @@ public class Bullet extends Thread{
 	
 	public void run() {
 		try {
-			sleep(bombTimer);
+                        for(int k=0;k<8;k++){
+                        //if (escenario.getCaracterEnCoordenada(posx, posy) == '@')
+                        //    escenario.limpiarCoordenaDelEscenario(posx, posy);                      
+                        move();
+                        sleep(1000);
+                        escenario.limpiarCoordenaDelEscenario(posx, posy);
+                        }
+                    
+                        sleep(bombTimer);
 			explosion();
 			render();
 			sleep(1000);
@@ -55,43 +63,26 @@ public class Bullet extends Thread{
                                     JOptionPane.showMessageDialog(null, "Has muerto 2");
                                     escenario.setUserAlive(false);
 				}
-				escenario.setCaracterEnCoordenada('*', getX() + i, getY());					
+									
 			}
 		}
-		for (int i = -explosionRange; i <= explosionRange; i++) {
-			if (getX()>= 0 && getY() + i>=0) {
-				icon = escenario.getCaracterEnCoordenada(getX(), getY() + i);
-				if ( icon == '#') continue;
-				if ( jugadorX == getX() && jugadorY == getY() + i && !this.jugador.getIsDead()) {
-					this.jugador.setIsDead();
-                                        JOptionPane.showMessageDialog(null, "Has muerto 3");
-					escenario.setUserAlive(false);
-				}
-				if ( icon == 'o' && !this.jugador.getIsDead()) {
-                                        this.jugador.setIsDead();
-					JOptionPane.showMessageDialog(null, "Has muerto 4");
-					escenario.setUserAlive(false);
-				}
-				escenario.setCaracterEnCoordenada('*', getX(), getY() + i);
-			}
-		}
+		
 	}
 	
 	public void clearExplosion() {
 		int explosionRange = getExplosionRange();
 		int x = getX();
 		int y = getY();
-		for (int i = -explosionRange; i <= explosionRange; i++) {
-			if (x + i>= 0 && y>=0 && escenario.getCaracterEnCoordenada(getX() + i, getY()) != '#')
-				escenario.setCaracterEnCoordenada(' ', x + i, y);
-		}
-		for (int i = -explosionRange; i <= explosionRange; i++) {
-			if (x>= 0 && y + i>=0 && escenario.getCaracterEnCoordenada(getX(), getY() + i) != '#')
-				escenario.setCaracterEnCoordenada(' ', x, y + i);
-		}
+                escenario.setCaracterEnCoordenada(' ', x, y);
+		
 	}
         
-        
+        public void move(){
+            posy=posy-1;
+            render();
+            escenario.setCaracterEnCoordenada('*', posx, posy);
+            
+        }
 	
 	public void render() {
 		escenario.mostrarEscenario();
