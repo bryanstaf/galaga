@@ -20,11 +20,11 @@ public class TCPServerThread extends Thread {
     private String message;
     TCPServerThread[] cli_amigos;
 
-    public TCPServerThread(Socket client_, TCPServer tcpserver_, int clientID_, TCPServerThread[] cli_ami_) {
+    public TCPServerThread(Socket client_, TCPServer tcpserver_, int clientID_, TCPServerThread[] cliAmigos) {
         this.client = client_;
         this.tcpserver = tcpserver_;
         this.clientID = clientID_;
-        this.cli_amigos = cli_ami_;
+        this.cli_amigos = cliAmigos;
     }
 
     public void trabajen(int cli) {

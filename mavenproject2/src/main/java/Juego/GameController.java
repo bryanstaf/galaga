@@ -16,8 +16,8 @@ public class GameController extends javax.swing.JFrame {
     int xInit = 39, yInit = 6;
     Stage escenario = null;
     CreateStage mEsc;
-    private int posBomX = -1;
-    private int posBomY = -1;
+    private int posBulletX = -1;
+    private int posBulletY = -1;
     
     public GameController() {
         initComponents();
@@ -56,7 +56,7 @@ public class GameController extends javax.swing.JFrame {
         }
     }
     
-    public void setBombaAtPosition(int x, int y) {
+    public void setBulletAtPosition(int x, int y) {
     	//System.out.println(x + y);
         //this.escenario.setCaracterEnCoordenada('z', x, y);
 
@@ -64,20 +64,20 @@ public class GameController extends javax.swing.JFrame {
         (new Bullet(x,y,this.escenario, this.localPlayer)).start();
     }
     
-    public int getPosBomX() {
-		return posBomX;
+    public int getPosBulletX() {
+		return posBulletX;
 	}
 
-	public void setPosBomX(int posBomX) {
-		this.posBomX = posBomX;
+	public void setPosBulletX(int posBulletX) {
+		this.posBulletX = posBulletX;
 	}
 
-	public int getPosBomY() {
-		return posBomY;
+	public int getPosBulletY() {
+		return posBulletY;
 	}
 
-	public void setPosBomY(int posBomY) {
-		this.posBomY = posBomY;
+	public void setPosBulletY(int posBulletY) {
+		this.posBulletY = posBulletY;
 	}
 
 	public void startGame() {
@@ -189,8 +189,8 @@ public class GameController extends javax.swing.JFrame {
         // TODO add your handling code here:
         isAlive();
     	localPlayer.dropBomb(localPlayer.getx(), localPlayer.gety(), localPlayer.getMapa());
-        setPosBomX(localPlayer.getx());
-        setPosBomY(localPlayer.gety());
+        setPosBulletX(localPlayer.getx());
+        setPosBulletY(localPlayer.gety());
         localPlayer.setHasBomb(false);
     }//GEN-LAST:event_jButton5ActionPerformed
 
