@@ -18,7 +18,7 @@ public class GameController extends javax.swing.JFrame {
     CreateStage mEsc;
     private int posBulletX = -1;
     private int posBulletY = -1;
-    
+
     public GameController() {
         initComponents();
     }
@@ -26,16 +26,16 @@ public class GameController extends javax.swing.JFrame {
     public player getCharacter() {
         return this.localPlayer;
     }
-    
+
     public Stage getEscenario() {
-    	return this.escenario;
+        return this.escenario;
     }
 
     public void setPlayerID(int id) {
         System.out.println("Se esta iniciando el juego...");
         this.playerID = id;
         System.out.println("setPlayerID.id = " + id + ", posIniciales.length = " + posIniciales.length);
-        String[] pos = posIniciales[(id - 1)%5].split("\\s");
+        String[] pos = posIniciales[(id - 1) % 5].split("\\s");
         this.xInit = Integer.parseInt(pos[0]);
         this.yInit = Integer.parseInt(pos[1]);
         startGame();
@@ -44,43 +44,43 @@ public class GameController extends javax.swing.JFrame {
     public void setPlayerAtPosition(int id, int x, int y) {
         // 1 --> '1'
         // this.escenario.mostrarEscenario();
-        if (!this.posIniciales[(id - 1)%5].equals((x) + " " + (y))) {
+        if (!this.posIniciales[(id - 1) % 5].equals((x) + " " + (y))) {
             this.escenario.setCaracterEnCoordenada((char) (id + 48), x, y);
-            String[] posDeJugador = this.posIniciales[(id - 1)%5].split("\\s");
+            String[] posDeJugador = this.posIniciales[(id - 1) % 5].split("\\s");
             int xPast = Integer.parseInt(posDeJugador[0]);
             int yPast = Integer.parseInt(posDeJugador[1]);
             this.escenario.limpiarCoordenaDelEscenario(xPast, yPast);
             this.escenario.mostrarEscenario();
-            this.posIniciales[(id - 1)%5] = x + " " + y;
+            this.posIniciales[(id - 1) % 5] = x + " " + y;
             //System.out.println("x past + y past" + xPast + " " + yPast + " " + this.posIniciales[id - 1]);
         }
     }
-    
+
     public void setBulletAtPosition(int x, int y) {
-    	//System.out.println(x + y);
+        //System.out.println(x + y);
         //this.escenario.setCaracterEnCoordenada('z', x, y);
 
         this.escenario.mostrarEscenario();
-        (new Bullet(x,y,this.escenario, this.localPlayer)).start();
+        (new Bullet(x, y, this.escenario, this.localPlayer)).start();
     }
-    
+
     public int getPosBulletX() {
-		return posBulletX;
-	}
+        return posBulletX;
+    }
 
-	public void setPosBulletX(int posBulletX) {
-		this.posBulletX = posBulletX;
-	}
+    public void setPosBulletX(int posBulletX) {
+        this.posBulletX = posBulletX;
+    }
 
-	public int getPosBulletY() {
-		return posBulletY;
-	}
+    public int getPosBulletY() {
+        return posBulletY;
+    }
 
-	public void setPosBulletY(int posBulletY) {
-		this.posBulletY = posBulletY;
-	}
+    public void setPosBulletY(int posBulletY) {
+        this.posBulletY = posBulletY;
+    }
 
-	public void startGame() {
+    public void startGame() {
         mEsc = new CreateStage(xInit, yInit);
         this.localPlayer = mEsc.getJugador();
         mEsc.iniciar();
@@ -188,41 +188,41 @@ public class GameController extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         isAlive();
-    	localPlayer.dropBomb(localPlayer.getx(), localPlayer.gety(), localPlayer.getMapa());
+        localPlayer.dropBullet(localPlayer.getx(), localPlayer.gety(), localPlayer.getMapa());
         setPosBulletX(localPlayer.getx());
         setPosBulletY(localPlayer.gety());
-        localPlayer.setHasBomb(false);
+        localPlayer.setHasBullet(false);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
-    	isAlive();
-        localPlayer.man_left();
+        isAlive();
+        localPlayer.manLeft();
         // TODO add your handling code here:
     }// GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed
-    	isAlive();
-    	localPlayer.man_up();
+        isAlive();
+        localPlayer.manUp();
         // TODO add your handling code here:
     }// GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton3ActionPerformed
-    	isAlive();
-    	localPlayer.man_right();
+        isAlive();
+        localPlayer.manRight();
         // TODO add your handling code here:
     }// GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton4ActionPerformed
-    	isAlive();
-    	localPlayer.man_down();
+        isAlive();
+        localPlayer.manDown();
         // TODO add your handling code here:
     }// GEN-LAST:event_jButton4ActionPerformed
 
     public void isAlive() {
-    	if (!escenario.isUserAlive()) {
-    		localPlayer.kill_character();
-    		System.exit(0);
-    	}
+        if (!escenario.isUserAlive()) {
+            localPlayer.killCharacter();
+            System.exit(0);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

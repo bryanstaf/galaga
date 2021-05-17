@@ -1,11 +1,6 @@
 package Juego;
 
-import java.lang.reflect.Array;
-import java.util.Random;
-
 public class Nave extends StageComponent {
-
-    private int numeroMuroD = 14;
 
     public Nave() {
         this.setIcono('=');

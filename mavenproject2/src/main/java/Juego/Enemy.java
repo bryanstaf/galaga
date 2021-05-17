@@ -23,7 +23,7 @@ public class Enemy {
         this.bornTime = bornTime;
     }
 
-    public void killEnemigo() {
+    public void killEnemy() {
         this.isDead = true;
     }
 

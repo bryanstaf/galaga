@@ -6,10 +6,6 @@ public class Wall extends StageComponent {
         setIcono(':');
     }
 
-    public void agregarMuroFila() {
-
-    }
-
     public void agregarMuroFila(Stage escenario, Wall muro, int numeroFila) {
         for (int i = 0; i < escenario.getAnchoEscenario(); i++) {
             escenario.setCaracterEnCoordenada(muro, i, numeroFila);
